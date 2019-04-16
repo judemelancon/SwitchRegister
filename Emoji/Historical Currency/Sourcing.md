@@ -1,0 +1,1 @@
+These are all much too old for copyright protection to still apply.
