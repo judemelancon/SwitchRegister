@@ -1,0 +1,1 @@
+These are based on a [graphic](https://commons.wikimedia.org/wiki/File:SinusRhythmLabels.svg) from Wikimedia Commons released into the public domain by its [creator](https://en.wikipedia.org/wiki/User:Agateller). All modifications from that source were done by Jude.

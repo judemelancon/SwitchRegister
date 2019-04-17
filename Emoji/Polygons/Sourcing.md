@@ -1,0 +1,1 @@
+These are all too simple to meet the threshold of originality.
