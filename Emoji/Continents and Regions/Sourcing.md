@@ -1,0 +1,1 @@
+The silhouette of a continent or other well-defined region lacks the originality necessary for copyright.

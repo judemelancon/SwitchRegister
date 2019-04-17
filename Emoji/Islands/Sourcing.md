@@ -1,0 +1,1 @@
+The silhouette of an island lacks the originality necessary for copyright.
