@@ -5,6 +5,6 @@ Emoji|Notes
 ![MICR](micr.png)|These are two of the standardized MICR symbols.
 ![MICR Dash](micr_dash.png)|This is a standardized MICR symbol.
 ![On-Us](on-us.png)|This is a standardized MICR symbol.
-![QRQRQRQR](qrqrqrqr.png)|This is a QR code for "QRQRQRQR".
+![QR](qr.png)|This is a QR code for "QRQRQRQR".
 ![Transit](transit.png)|This is a standardized MICR symbol.
 ![UPC](upc.png)|This is the UPC for the third edition of _C# in Depth_ by Jon Skeet.
