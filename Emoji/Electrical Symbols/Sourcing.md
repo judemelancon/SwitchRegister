@@ -1,0 +1,1 @@
+These are all international standardized symbols.

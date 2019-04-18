@@ -1,0 +1,1 @@
+In addition to being international standardized symbols, these are also much too old for copyright protection to still apply.
