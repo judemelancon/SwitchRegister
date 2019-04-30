@@ -12,7 +12,7 @@ Everything in the Scripts directory is licensed under the Script License below.
 
 ## Other Files
 
-Every `Sourcing.md` and `Aliases.txt` file in the Emoji directory and every Markdown file in the root directory is licensed under CC BY-SA 4.0.
+Every Markdown file and `Aliases.txt` file in the Emoji directory and every Markdown file in the root directory is licensed under CC BY-SA 4.0.
 
 If there are any other files, please inquire.
 

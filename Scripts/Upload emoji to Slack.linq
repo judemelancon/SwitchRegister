@@ -19,7 +19,7 @@ private static readonly string UploadedDirectoryName = Path.Combine(Environment.
 // If this is false, images with names that are not valid for Slack emoji after lowercasing and dropping extensions are silently ignored.
 private const bool ErrorForInvalidImageFilename = true;
 private const bool DeleteEmptySubdirectories = true;
-private const bool DeleteSourcingMarkdown = true;
+private const bool DeleteReadmeMarkdown = true;
 private const bool MoveFullSizeEmoji = true;
 // End of Primary Configuration
 
@@ -61,9 +61,9 @@ public static void Main() {
         UploadAndRecordEmojiAsync(name, filePath).GetAwaiter().GetResult();
     }
 
-    if (DeleteSourcingMarkdown) {
-        foreach (string sourcingMarkdownFilename in Directory.EnumerateFiles(QueuedDirectoryName, "Sourcing.md", SearchOption.AllDirectories))
-            File.Delete(sourcingMarkdownFilename);
+    if (DeleteReadmeMarkdown) {
+        foreach (string readmeMarkdownFilename in Directory.EnumerateFiles(QueuedDirectoryName, "README.md", SearchOption.AllDirectories))
+            File.Delete(readmeMarkdownFilename);
     }
 
     if (DeleteEmptySubdirectories) {

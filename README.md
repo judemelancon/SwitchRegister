@@ -11,7 +11,7 @@ This is a collection of emoji that are free to use with [attribution](#license).
 
 ## Structure
 
-The Emoji are in the Emoji directory classified into subdirectories to allow partial imports. A file is present in in each directory explaining the sourcing of the emoji in that directory.
+The emoji are in the Emoji directory classified into subdirectories to allow partial imports. A Markdown file is present in each directory explaining the sourcing of the emoji in that directory.
 
 The scripts are in the Scripts directory. Their organization will be free form until they are numerous enough to merit further specification.
 
