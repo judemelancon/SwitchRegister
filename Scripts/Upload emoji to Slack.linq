@@ -1,18 +1,15 @@
 <Query Kind="Program">
   <Output>DataGrids</Output>
   <Reference>&lt;RuntimeDirectory&gt;\System.Net.Http.dll</Reference>
-  <NuGetReference>Nito.AsyncEx</NuGetReference>
-  <Namespace>Nito.AsyncEx.Synchronous</Namespace>
   <Namespace>System.Collections.ObjectModel</Namespace>
   <Namespace>System.Net</Namespace>
   <Namespace>System.Net.Http</Namespace>
   <Namespace>System.Net.Http.Headers</Namespace>
   <Namespace>System.Threading.Tasks</Namespace>
-  <Namespace>System.Collections.Immutable</Namespace>
 </Query>
 
 // This is can be run in LINQPad ( http://www.linqpad.net/ ) in C# Program mode.
-// It uses the NuGet feature that requires a Developer or Premium license.
+// It should work fine with the Free edition.
 // Alternatively, it could be translated to a console program easily enough.
 
 // Primary Configuration:
@@ -61,7 +58,7 @@ public static void Main() {
 
     $"Uploading {listed.Count} emoji...".Dump();
     foreach ((string name, string filePath) in listed) {
-        UploadAndRecordEmojiAsync(name, filePath).WaitAndUnwrapException();
+        UploadAndRecordEmojiAsync(name, filePath).GetAwaiter().GetResult();
     }
 
     if (DeleteSourcingMarkdown) {
@@ -98,18 +95,18 @@ private static IReadOnlyCollection<(string Name, string FilePath)> ListAndDumpEm
 private static IReadOnlyCollection<(string Name, string FilePath)> ListEmoji() {
     // uniqueness check
     ILookup<string, string> found = Directory.EnumerateFiles(QueuedDirectoryName, "*.png", SearchOption.AllDirectories)
-                                                         .Concat(Directory.EnumerateFiles(QueuedDirectoryName, "*.gif", SearchOption.AllDirectories))
-                                                         .Concat(Directory.EnumerateFiles(QueuedDirectoryName, "*.jpg", SearchOption.AllDirectories))
-                                                         .Concat(Directory.EnumerateFiles(QueuedDirectoryName, "*.jpeg", SearchOption.AllDirectories))
-                                                         .ToLookup(s => Path.GetFileNameWithoutExtension(s).Trim().ToLowerInvariant());
+                                             .Concat(Directory.EnumerateFiles(QueuedDirectoryName, "*.gif", SearchOption.AllDirectories))
+                                             .Concat(Directory.EnumerateFiles(QueuedDirectoryName, "*.jpg", SearchOption.AllDirectories))
+                                             .Concat(Directory.EnumerateFiles(QueuedDirectoryName, "*.jpeg", SearchOption.AllDirectories))
+                                             .ToLookup(s => Path.GetFileNameWithoutExtension(s).Trim().ToLowerInvariant());
     if (!found.Any()) {
         Util.Highlight("Found no emoji to upload").Dump();
         return null;
     }
 
     IReadOnlyList<string> duplicateNames = found.Where(ig => ig.Count() > 1)
-                                                 .Select(ig => ig.Key)
-                                                 .ToList();
+                                                .Select(ig => ig.Key)
+                                                .ToList();
     if (duplicateNames.Any()) {
         foreach (string duplicateName in duplicateNames)
             Util.Highlight(duplicateName + " duplicated: " + string.Join(", ", found[duplicateName].Select(s => $"'{s}'"))).Dump();
@@ -128,10 +125,10 @@ private static IReadOnlyCollection<(string Name, string FilePath)> ListEmoji() {
     }
 
     return found.Where(kvp => EmojiNamePattern.IsCoveringMatch(kvp.Key))
-                  .Select(kvp => (Name: kvp.Key, FilePath: kvp.Single()))
-                  .OrderByDescending(t => t.Name == AddedEmojiName)
-                  .ThenBy(t => t.FilePath)
-                  .ToImmutableList();
+                .Select(kvp => (Name: kvp.Key, FilePath: kvp.Single()))
+                .OrderByDescending(t => t.Name == AddedEmojiName)
+                .ThenBy(t => t.FilePath)
+                .ToList();
 }
 
 
@@ -236,7 +233,7 @@ private static HttpClient ConstructClient() {
 
 
 private static string GetToken() {
-    string uploadPage = Client.GetStringAsync(TokenAddress).WaitAndUnwrapException();
+    string uploadPage = Client.GetStringAsync(TokenAddress).GetAwaiter().GetResult();
     MatchCollection matches = TokenPattern.Matches(uploadPage);
     switch (matches.Count) {
         case 0:
