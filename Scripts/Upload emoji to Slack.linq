@@ -17,10 +17,6 @@
 
 // Primary Configuration:
 private const string SlackInstanceDomain = "FIXME.slack.com";
-private static IReadOnlyDictionary<string, string> Cookies = new Dictionary<string, string> {
-                                                                                              // This seems to be the only cookie needed at present.
-                                                                                              { "d", "FIXME" }
-                                                                                            };
 private static readonly string QueuedDirectoryName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "Emoji", "To " + SlackInstanceDomain);
 private static readonly string UploadedDirectoryName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "Emoji", "Sent to " + SlackInstanceDomain);
 // If this is false, images with names that are not valid for Slack emoji after lowercasing and dropping extensions are silently ignored.
@@ -41,6 +37,8 @@ private static TimeSpan WaitAfterUpload = new TimeSpan(0, 0, 0, 1, 125);
 
 // constants based on Slack's behavior and documentation
 private const int JumbojiLimit = 23;
+// This seems to be the only cookie needed at present.
+private static IReadOnlyCollection<string> CookieNames = new ReadOnlyCollection<string>(new[] { "d" });
 private const HttpStatusCode TooManyRequests = (HttpStatusCode)429;
 private static TimeSpan WaitAfterTooManyRequests = new TimeSpan(0, 0, 5, 0, 5);
 private static readonly Uri TokenAddress = new Uri("https://" + SlackInstanceDomain + "/customize/emoji");
@@ -216,15 +214,23 @@ private static HttpContent ConstructContent(string name, byte[] emojiData) {
 
 
 private static HttpClient ConstructClient() {
-    HttpClientHandler handler = new HttpClientHandler();
-    handler.CookieContainer = new CookieContainer();
-    if (!Cookies.Any())
-        Util.Highlight($"No cookies").Dump();
-    foreach (KeyValuePair<string, string> cookie in Cookies) {
-        if (string.IsNullOrWhiteSpace(cookie.Value) || StringComparer.InvariantCultureIgnoreCase.Equals(cookie.Value, "FIXME") || StringComparer.InvariantCultureIgnoreCase.Equals(cookie.Value, "TODO"))
-            Util.Highlight($"Suspect cookie '{cookie.Key}': '{cookie.Value}'").Dump();
-        handler.CookieContainer.Add(new Cookie(cookie.Key, cookie.Value) { Domain = SlackInstanceDomain });
+    if (SlackInstanceDomain.StartsWith("FIXME", StringComparison.InvariantCultureIgnoreCase)) {
+        string message = $"{nameof(SlackInstanceDomain)} needs to be configured";
+        Util.Highlight(message).Dump();
+        throw new Exception(message);
     }
+
+    HttpClientHandler handler = new HttpClientHandler() { CookieContainer = new CookieContainer() };
+
+    if (!CookieNames.Any())
+        Util.Highlight($"No cookies").Dump();
+    foreach (string cookieName in CookieNames) {
+        string cookieValue = Util.GetPassword($"{SlackInstanceDomain} Cookie {cookieName}");
+        if (string.IsNullOrWhiteSpace(cookieValue))
+            Util.Highlight($"Implausible cookie '{cookieName}'").Dump();
+        handler.CookieContainer.Add(new Cookie(cookieName, cookieValue) { Domain = SlackInstanceDomain });
+    }
+
     return new HttpClient(handler);
 }
 
