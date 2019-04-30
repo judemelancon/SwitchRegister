@@ -1,1 +1,20 @@
 These are all simple text.
+
+![Big O](big_o.png)
+![Little O](little_o.png)
+![Big Omega](big_omega.png)
+![Big Theta](big_theta.png)
+![Constantly Bound](constantlybound.png)
+![Double-logarithimically Bound](doublelogarithimicallybound.png)
+![Logarithimically Bound](logarithimicallybound.png)
+![Polylogarithmically Bound](polylogarithmicallybound.png)
+![Linearly Bound](linearlybound.png)
+![Linearithmically Bound](linearithmicallybound.png)
+![Quadratically Bound](quadraticallybound.png)
+![Cubically Bound](cubicallybound.png)
+![Quartically Bound](quarticallybound.png)
+![Quintically Bound](quinticallybound.png)
+![Polynomially Bound](polynomiallybound.png)
+![Exponentially Bound](exponentiallybound.png)
+![Factorially Bound](factoriallybound.png)
+
