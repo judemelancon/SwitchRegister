@@ -19,7 +19,7 @@ Emoji|Notes|Adenine?|Cytosine?|Guanine?|Thymine?|Uracil?
 ![Nucleobase K](nucleobase_k.png)|Keto| | |Maybe|Maybe in DNA|Maybe in RNA
 ![Nucleobase M](nucleobase_m.png)|aMino|Maybe|Maybe| | |
 ![Nucleobase B](nucleobase_b.png)|not A| |Maybe|Maybe|Maybe in DNA|Maybe in RNA
-![Nucleobase D](nucleobase_d.png)|not C|Maybe| |Maybe in DNA|Maybe in RNA
+![Nucleobase D](nucleobase_d.png)|not C|Maybe| |Maybe|Maybe in DNA|Maybe in RNA
 ![Nucleobase H](nucleobase_h.png)|not G|Maybe|Maybe| |Maybe in DNA|Maybe in RNA
 ![Nucleobase V](nucleobase_v.png)|not T or U|Maybe|Maybe|Maybe| |
 ![Nucleobase Z](nucleobase_z.png)|Zero possibilities|No|No|No|No|No
