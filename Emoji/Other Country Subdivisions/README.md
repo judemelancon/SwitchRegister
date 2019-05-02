@@ -1,1 +1,4 @@
 The silhouette of an administrative or political subdivision of a country lacks the originality necessary for copyright.
+
+![Dagestan](dagestan.png)
+![Taiwan](taiwan.png)
