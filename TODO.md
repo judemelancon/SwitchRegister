@@ -1,3 +1,5 @@
+* Finish sets
+  * Rank Insignia
 * Add more emoji
 * Add more scripts
   * Slack emoji management scripts
