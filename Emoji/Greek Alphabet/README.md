@@ -2,8 +2,8 @@ These are all simple text.
 
 ### Greek Alphabet
 
-Uppercase|Lowercase|Variant
----|---|---
+Uppercase|Lowercase|Variant/Notes
+---------|---------|-------------
 ![Uppercase Alpha](uppercase_alpha.png)|![Alpha](alpha.png)|
 ![Uppercase Beta](uppercase_beta.png)|![Beta](beta.png)|
 ![Uppercase Gamma](uppercase_gamma.png)|![Gamma](gamma.png)|
@@ -15,7 +15,7 @@ Uppercase|Lowercase|Variant
 ![Uppercase Iota](uppercase_iota.png)|![Iota](iota.png)|
 ![Uppercase Kappa](uppercase_kappa.png)|![Kappa](kappa.png)|
 ![Uppercase Lambda](uppercase_lambda.png)|![Lambda](lambda.png)|
-![Uppercase Mu](uppercase_mu.png)|![Mu](mu.png)|
+![Uppercase Mu](uppercase_mu.png)|![Mu](mu.png)|Slack won't take the lowercase because they've reserved the name for internationalization. Presumably this relates to the ISO 3166 country code for the Republic of Mauritius.
 ![Uppercase Nu](uppercase_nu.png)|![Nu](nu.png)|
 ![Uppercase Xi](uppercase_xi.png)|![Xi](xi.png)|
 ![Uppercase Omicron](uppercase_omicron.png)|![Omicron](omicron.png)|

@@ -1,5 +1,7 @@
 In general, the silhouette of a country lacks the originality necessary for copyright.
 
+Slack won't take a large fraction of these because they've reserved the names for internationalization.
+
 ![Afghanistan](afghanistan.png)
 ![Albania](albania.png)
 ![Algeria](algeria.png)
