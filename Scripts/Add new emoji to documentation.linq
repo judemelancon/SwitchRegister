@@ -6,26 +6,41 @@
 </Query>
 
 // This is can be run in LINQPad ( http://www.linqpad.net/ ) in C# Program mode.
-// It uses the NuGet feature that requires a Developer or Premium license.
+// It uses the NuGet feature, which requires a Developer or Premium license.
 // Alternatively, it could be translated to a console program easily enough.
 
-private static readonly string EmojiRootDirectory = Path.Combine(Path.GetDirectoryName(Util.CurrentQueryPath), "../Emoji");
+private static readonly string RootDirectory = Path.Combine(Path.GetDirectoryName(Util.CurrentQueryPath), "..");
 private const string DocumentationFilename = "README.md";
 private static readonly IReadOnlyCollection<string> EmojiPatterns = new[] { "*.png", "*.gif", "*.jpg", "*.jpeg" };
+private static readonly Regex EmojiCountReplacementPattern = new Regex(@"(?<comment><!--\s*EmojiCountReplacementTarget.*?-->)[0-9]*");
 
 public void Main() {
-    foreach (string subdirectoryName in Directory.EnumerateDirectories(EmojiRootDirectory, "*", SearchOption.AllDirectories)) {
+    int emojiCount = 0;
+    int missingEmojiCount = 0;
+    foreach (string subdirectoryName in Directory.EnumerateDirectories(Path.Combine(RootDirectory, "Emoji"), "*", SearchOption.AllDirectories)) {
         string documentationFilePath = Path.Combine(subdirectoryName, DocumentationFilename);
         (bool table, ISet<string> referenced) = Extract(documentationFilePath);
         ISet<string> existent = EmojiPatterns.SelectMany(s => Directory.EnumerateFiles(subdirectoryName, s))
                                              .Select(Path.GetFileName)
                                              .ToHashSet(StringComparer.InvariantCultureIgnoreCase);
+        emojiCount += existent.Count;
         ISet<string> missingFromDocumentation = new HashSet<string>(existent);
         missingFromDocumentation.ExceptWith(referenced);
-        AppendMissing(documentationFilePath, table,  missingFromDocumentation);
+        AppendMissing(documentationFilePath, table, missingFromDocumentation);
         ISet<string> missingFromSubdirectory = new HashSet<string>(referenced);
         missingFromSubdirectory.ExceptWith(existent);
         DumpMissing(documentationFilePath, missingFromSubdirectory);
+        missingEmojiCount += missingFromSubdirectory.Count;
+    }
+    $"{emojiCount} emoji existed".Dump();
+    if (missingEmojiCount > 0) {
+        Util.Highlight($"The count was not updated because {missingEmojiCount} documented emoji did not exist.").Dump();
+    }
+    else {
+        string rootDocumentationFilePath = Path.Combine(RootDirectory, DocumentationFilename);
+        File.WriteAllText(rootDocumentationFilePath,
+                          EmojiCountReplacementPattern.Replace(File.ReadAllText(rootDocumentationFilePath),
+                                                               m => m.Groups["comment"].Value + emojiCount));
     }
 }
 
