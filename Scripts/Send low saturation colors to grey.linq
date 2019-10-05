@@ -15,11 +15,12 @@ private const double SaturationThreshold = 0.1;
 // End of Configuration
 
 
-
-// https://abc.useallfive.com/?colors[]=000000,747474,757575,767676,777777,FFFFFF
-private const byte DarkAccessibleGrey = 117;
-private const byte LightAccessibleGrey = 118;
-private const double MedianAccessibleGrey = 0.5*(DarkAccessibleGrey + LightAccessibleGrey);
+// https://abc.useallfive.com/?colors[]=000000,FFFFFF,1A1D21,757575,767676,7D7D7D
+// respectively: black, white, Slack's dark mode background color,
+//               both greys [decimal 117 and 118] that have sufficient contrast, 4.5, to meet WCAG 2.0 level AA against both pure black and pure white backgrounds
+//               the grey [decimal 125] with the best balanced contrast ratios against white and Slack's dark mode background color
+private const byte DarkestAcceptableGrey = 125;
+private const byte LightestAcceptableGrey = 125;
 
 void Main() {
     if (string.IsNullOrWhiteSpace(SourceDirectory))
@@ -66,31 +67,35 @@ public static void SendLowSaturationColorsToAccessibleGrey(IMagickImage image, d
 
     using (IPixelCollection pixels = image.GetPixels()) {
         foreach (Pixel pixel in pixels) {
-            if (pixel[channelIndex[PixelChannel.Alpha]] == 0)
-                continue;
-
-            double grey;
-            if (channelIndex.Count == 4) {
-                byte r = pixel[channelIndex[PixelChannel.Red]];
-                byte g = pixel[channelIndex[PixelChannel.Green]];
-                byte b = pixel[channelIndex[PixelChannel.Blue]];
-                int minimumChannel = Math.Min(r, Math.Min(g, b));
-                int maximumChannel = Math.Max(r, Math.Max(g, b));
-                if (minimumChannel < 255 && maximumChannel > 0) {
-                    double saturation = (maximumChannel - minimumChannel) / (255.0 - Math.Abs(maximumChannel + minimumChannel - 255.0));
-                    if (saturation > saturationThreshold)
-                        continue;
-                }
-
-                grey = 0.21 * r + 0.72 * g + 0.07 * b;
-            }
-            else {
-                grey = pixel[channelIndex[PixelChannel.Gray]];
-            }
-
-            SetPixelToGrey(channelIndex, pixel, grey <= MedianAccessibleGrey ? DarkAccessibleGrey : LightAccessibleGrey);
+            SetPixelToAcceptableGrey(channelIndex, pixel, saturationThreshold);
         }
     }
+}
+
+private static void SetPixelToAcceptableGrey(IReadOnlyDictionary<PixelChannel, int> channelIndex, Pixel pixel, double saturationThreshold) {
+    if (pixel[channelIndex[PixelChannel.Alpha]] == 0)
+        return;
+
+    byte currentGrey;
+    if (channelIndex.Count == 4) {
+        byte r = pixel[channelIndex[PixelChannel.Red]];
+        byte g = pixel[channelIndex[PixelChannel.Green]];
+        byte b = pixel[channelIndex[PixelChannel.Blue]];
+        int minimumChannel = Math.Min(r, Math.Min(g, b));
+        int maximumChannel = Math.Max(r, Math.Max(g, b));
+        if (minimumChannel < 255 && maximumChannel > 0) {
+            double saturation = (maximumChannel - minimumChannel) / (255.0 - Math.Abs(maximumChannel + minimumChannel - 255.0));
+            if (saturation > saturationThreshold)
+                return;
+        }
+
+        currentGrey = (byte)Math.Round(0.21 * r + 0.72 * g + 0.07 * b);
+    }
+    else {
+        currentGrey = pixel[channelIndex[PixelChannel.Gray]];
+    }
+
+    SetPixelToSpecifiedGrey(channelIndex, pixel, Math.Clamp(currentGrey, DarkestAcceptableGrey, LightestAcceptableGrey));
 }
 
 private static bool ConfirmExpectedChannels(IMagickImage image, IReadOnlyDictionary<PixelChannel, int> channelIndex) {
@@ -108,7 +113,7 @@ private static bool ConfirmExpectedChannels(IMagickImage image, IReadOnlyDiction
     }
 }
 
-private static void SetPixelToGrey(IReadOnlyDictionary<PixelChannel, int> channelIndex, Pixel pixel, byte grey) {
+private static void SetPixelToSpecifiedGrey(IReadOnlyDictionary<PixelChannel, int> channelIndex, Pixel pixel, byte grey) {
     if (channelIndex.Count == 4) {
         pixel[channelIndex[PixelChannel.Red]] = grey;
         pixel[channelIndex[PixelChannel.Green]] = grey;
