@@ -72,6 +72,21 @@ public static void SendLowSaturationColorsToAccessibleGrey(IMagickImage image, d
     }
 }
 
+private static bool ConfirmExpectedChannels(IMagickImage image, IReadOnlyDictionary<PixelChannel, int> channelIndex) {
+    switch (image.ChannelCount) {
+        case 2:
+            return channelIndex.ContainsKey(PixelChannel.Alpha)
+                   && channelIndex.ContainsKey(PixelChannel.Gray);
+        case 4:
+            return channelIndex.ContainsKey(PixelChannel.Alpha)
+                   && channelIndex.ContainsKey(PixelChannel.Red)
+                   && channelIndex.ContainsKey(PixelChannel.Green)
+                   && channelIndex.ContainsKey(PixelChannel.Blue);
+        default:
+            return false;
+    }
+}
+
 private static void SetPixelToAcceptableGrey(IReadOnlyDictionary<PixelChannel, int> channelIndex, Pixel pixel, double saturationThreshold) {
     if (pixel[channelIndex[PixelChannel.Alpha]] == 0)
         return;
@@ -96,21 +111,6 @@ private static void SetPixelToAcceptableGrey(IReadOnlyDictionary<PixelChannel, i
     }
 
     SetPixelToSpecifiedGrey(channelIndex, pixel, Math.Clamp(currentGrey, DarkestAcceptableGrey, LightestAcceptableGrey));
-}
-
-private static bool ConfirmExpectedChannels(IMagickImage image, IReadOnlyDictionary<PixelChannel, int> channelIndex) {
-    switch (image.ChannelCount) {
-        case 2:
-            return channelIndex.ContainsKey(PixelChannel.Alpha)
-                   && channelIndex.ContainsKey(PixelChannel.Gray);
-        case 4:
-            return channelIndex.ContainsKey(PixelChannel.Alpha)
-                   && channelIndex.ContainsKey(PixelChannel.Red)
-                   && channelIndex.ContainsKey(PixelChannel.Green)
-                   && channelIndex.ContainsKey(PixelChannel.Blue);
-        default:
-            return false;
-    }
 }
 
 private static void SetPixelToSpecifiedGrey(IReadOnlyDictionary<PixelChannel, int> channelIndex, Pixel pixel, byte grey) {
