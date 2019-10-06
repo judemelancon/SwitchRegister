@@ -13,4 +13,3 @@ The silhouette of an administrative or political subdivision of a country lacks 
 ![Quebec](quebec.png)
 ![Saskatchewan](saskatchewan.png)
 ![Yukon](yukon.png)
-
