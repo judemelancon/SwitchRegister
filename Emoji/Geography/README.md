@@ -132,7 +132,9 @@ In general, the silhouette of a country, a political subdivision of one, a conti
 
 ##### Reserved for Internationalization by Slack
 
-Slack won't take a large fraction of these because they've reserved the names for internationalization. The reason only some are reserved isn't clear.
+Slack won't take these because their names are reserved for internationalization. The reason only some are reserved isn't clear.
+
+The name `georgia` is also reserved, but the emoji above was named `georgia_country` to avoid a collision with the US state.
 
 ![Albania](albania.png)
 ![Andorra](andorra.png)
