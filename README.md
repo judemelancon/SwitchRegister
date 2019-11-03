@@ -2,7 +2,7 @@
 
 # Switch Register
 
-This is a collection of <!--EmojiCountReplacementTarget See Scripts/Add new emoji to documentation.linq for details. -->1370 emoji that are free to use with [attribution](#license).
+This is a collection of <!--EmojiCountReplacementTarget See Scripts/Add new emoji to documentation.linq for details. -->1626 emoji that are free to use with [attribution](#license).
 
 * All are 128 pixels square. This is the maximum and preferred size for use with [Slack](https://www.slack.com/). It will likely work acceptably with at least some other platforms as well.
 * Greyscale emoji were pushed to the narrow band of grey that remains accessibly distinct from both white and black. This makes them intelligible in Slack's regular and dark modes.
