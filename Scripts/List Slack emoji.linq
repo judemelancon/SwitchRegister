@@ -12,7 +12,7 @@
 </Query>
 
 // This is can be run in LINQPad ( http://www.linqpad.net/ ) in C# Program mode.
-// It uses the NuGet feature that requires a Developer or Premium license.
+// It uses the NuGet feature, which requires a Developer or Premium license.
 // Alternatively, it could be translated to a console program easily enough.
 
 private const string SlackInstanceDomain = "FIXME.slack.com";
