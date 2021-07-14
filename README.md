@@ -55,3 +55,7 @@ These were used in the creation and processing of many of the emoji.
 * [ezGIF](https://ezgif.com/)
 * [GIMP](https://www.gimp.org/)
 * [PNGGauntlet](https://pnggauntlet.com/)
+
+This is used for the images in the color keys in the relevant category README files.
+
+* [Placeholder.com](https://placeholder.com/)
