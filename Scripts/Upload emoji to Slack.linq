@@ -42,7 +42,7 @@ private static readonly Uri TokenAddress = new Uri("https://" + SlackInstanceDom
 private static readonly Uri UploadAddress = new Uri("https://" + SlackInstanceDomain + "/api/emoji.add");
 private const string UploadSuccessResponse = "{\"ok\":true}";
 private static readonly Regex EmojiNamePattern = new Regex(@"[-_a-z0-9]+", RegexOptions.Compiled);
-private static readonly Regex TokenPattern = new Regex(@"\s*""api_token"":\s*""(?<value>xoxs-[0-9]+-[0-9]+-[0-9]+-[0-9a-f]+)"",\s*",
+private static readonly Regex TokenPattern = new Regex(@"\s*""api_token"":\s*""(?<value>[a-z]+-[0-9]+-[0-9]+-[0-9]+-[0-9a-f]+)"",\s*",
                                                        RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
 public static HttpClient Client { get; } = ConstructClient();
