@@ -6,14 +6,14 @@ The color coding indicates the role of the byte in the UTF8 encoding. Therefore,
 
 Color|Meaning
 -----|-------
-![Grey](https://placehold.it/16/757575/757575)|Control character
-![Bronze](https://placehold.it/16/80783C/80783C)|Punctuation
-![Green](https://placehold.it/16/008800/008800)|Digit
-![Cyan](https://placehold.it/16/008484/008484)|Uppercase letter
-![Blue](https://placehold.it/16/3C6CF0/3C6CF0)|Lowercase letter
-![Orange](https://placehold.it/16/C45400/C45400)|Muli-byte sequence continuation
-![Fuchsia](https://placehold.it/16/D000D0/D000D0)|Multi-byte sequence start
-![Red](https://placehold.it/16/EC0000/EC0000)|Invalid
+![Grey](https://via.placeholder.com/16/757575/757575)|Control character
+![Bronze](https://via.placeholder.com/16/80783C/80783C)|Punctuation
+![Green](https://via.placeholder.com/16/008800/008800)|Digit
+![Cyan](https://via.placeholder.com/16/008484/008484)|Uppercase letter
+![Blue](https://via.placeholder.com/16/3C6CF0/3C6CF0)|Lowercase letter
+![Orange](https://via.placeholder.com/16/C45400/C45400)|Muli-byte sequence continuation
+![Fuchsia](https://via.placeholder.com/16/D000D0/D000D0)|Multi-byte sequence start
+![Red](https://via.placeholder.com/16/EC0000/EC0000)|Invalid
 
 Bytes that encode an entire character in UTF8 depict that character in the bottom left.
 
