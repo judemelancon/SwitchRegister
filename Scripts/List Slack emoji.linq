@@ -29,7 +29,7 @@ private const HttpStatusCode TooManyRequests = (HttpStatusCode)429;
 private static TimeSpan WaitAfterTooManyRequests = new TimeSpan(0, 0, 5, 0, 5);
 private static readonly Uri TokenAddress = new Uri("https://" + SlackInstanceDomain + "/customize/emoji");
 private static readonly Uri UploadAddress = new Uri("https://" + SlackInstanceDomain + "/api/emoji.adminList");
-private static readonly Regex TokenPattern = new Regex(@"\s*""api_token"":\s*""(?<value>xoxs-[0-9]+-[0-9]+-[0-9]+-[0-9a-f]+)"",\s*",
+private static readonly Regex TokenPattern = new Regex(@"\s*""api_token"":\s*""(?<value>[a-z]+-[0-9]+-[0-9]+-[0-9]+-[0-9a-f]+)"",\s*",
                                                        RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
 private static readonly SemaphoreSlim RequestBottleneck = new SemaphoreSlim(1);
