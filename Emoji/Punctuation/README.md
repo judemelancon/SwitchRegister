@@ -11,7 +11,7 @@ These are all simple text.
 ![Comma](comma.png)
 ![Dagger](dagger.png)
 ![Descending Ellipsis](descending_ellipsis.png)
-![Double Dagger](doubledagger.png)
+![Double Dagger](double_dagger.png)
 ![Exclamation Mark](exclamation_mark.png)
 ![Fleuron](fleuron.png)
 ![Forward Slash](forward_slash.png)
