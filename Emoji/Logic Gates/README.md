@@ -1,10 +1,10 @@
 These are all standardized symbols.
 
-![Buffer Gate](buffergate.png)
-![Not Gate](notgate.png)
-![And Gate](andgate.png)
-![Nand Gate](nandgate.png)
-![Or Gate](orgate.png)
-![Nor Gate](norgate.png)
-![Xor Gate](xorgate.png)
-![Xnor Gate](xnorgate.png)
+![Buffer Gate](buffer_gate.png)
+![Not Gate](not_gate.png)
+![And Gate](and_gate.png)
+![Nand Gate](nand_gate.png)
+![Or Gate](or_gate.png)
+![Nor Gate](nor_gate.png)
+![Xor Gate](xor_gate.png)
+![Xnor Gate](xnor_gate.png)
