@@ -228,7 +228,10 @@ private static HttpClient ConstructClient() {
         handler.CookieContainer.Add(new Cookie(cookieName, cookieValue) { Domain = SlackInstanceDomain });
     }
 
-    return new HttpClient(handler);
+    HttpClient client = new HttpClient(handler);
+    // Slack enforces a minimum version requirement on browsers.
+    client.DefaultRequestHeaders.UserAgent.ParseAdd("Chrome/10000");
+    return client;
 }
 
 
