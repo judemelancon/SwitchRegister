@@ -53,6 +53,7 @@ private static (bool Table, ISet<string> ReferencedImages) Extract(string filena
                                                 .SelectMany(pb => pb.Inline.Descendants<LinkInline>())
                                                 .Where(li => li.IsImage)
                                                 .Select(li => li.Url)
+                                                .Where(s => !s.StartsWith("http"))
                                                 .ToHashSet(StringComparer.InvariantCultureIgnoreCase);
         return (raw.Contains('|'), referencedImages);
     }
