@@ -38,7 +38,7 @@ public static HttpClient Client { get; } = ConstructClient();
 public static string Token { get; } = GetToken();
 
 public static void Main() {
-    IReadOnlyCollection<Emoji> emoji = Util.Cache(() => ListEmojiAsync().GetAwaiter().GetResult(), nameof(emoji), out bool fromCache);
+    IReadOnlyCollection<Emoji> emoji = Util.Cache(() => ListEmojiAsync().GetAwaiter().GetResult(), $"{nameof(emoji)} for {SlackInstanceDomain}", out bool fromCache);
     if (fromCache)
         "Found cached emoji".Dump();
     emoji.Count.Dump("Total");
