@@ -37,4 +37,5 @@ These are all simple text.
 ![Therefore](therefore.png)
 ![Tilde](tilde.png)
 ![Trademark](trademark.png)
+![Triple Dagger](triple_dagger.png)
 ![Vertical Ellipsis](vertical_ellipsis.png)
