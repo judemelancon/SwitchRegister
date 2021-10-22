@@ -173,7 +173,7 @@ public static class MultipartFormDataContentExtensions {
 public sealed class EmojiPage {
     public bool OK { get; set; }
     public Emoji[] Emoji { get; set; }
-    public Dictionary<string, Emoji> DisabledEmoji { get; set; }
+    public Emoji[] DisabledEmoji { get; set; }
     public int CustomEmojiTotalCount { get; set; }
     public EmojiPagingData Paging { get; set; }
 }
